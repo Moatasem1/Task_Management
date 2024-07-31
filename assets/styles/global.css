@@ -1,0 +1,59 @@
+:root {
+    --main-orange-clr: #EDB046;
+    --main-white-clr: #ffff;
+    --main-red-clr: #BA5112;
+    --secondary-red-clr: #953F0E;
+    --main-gray-clr: #B5B5B5;
+}
+
+/* components */
+.main-btn {
+    background-color: var(--main-red-clr);
+    color: var(--main-white-clr);
+}
+
+.main-btn:focus,
+.main-btn:hover {
+    background-color: var(--secondary-red-clr);
+}
+
+
+/* my framework */
+
+/* colors */
+.bg-main-orange {
+    background-color: var(--main-orange-clr);
+}
+
+.bg-main-red {
+    background-color: var(--main-red-clr);
+}
+
+.bg-main-gray {
+    background-color: var(--main-gray-clr);
+}
+
+.bg-main-white {
+    background-color: var(--main-white-clr);
+}
+
+.text-main-orange {
+    color: var(--main-orange-clr);
+}
+
+.text-main-red {
+    color: var(--main-red-clr);
+}
+
+.text-main-gray {
+    color: var(--main-gray-clr);
+}
+
+.text-main-white {
+    color: var(--main-white-clr);
+}
+
+/* Utility */
+.w-fit {
+    width: fit-content;
+}

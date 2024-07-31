@@ -1,0 +1,23 @@
+body {
+    background-image: url("../images/pattern.webp");
+    background-size: cover;
+    background-color: hsl(38, 82%, 60%, .2);
+    min-height: 100vh;
+}
+
+#signUpForm {
+    max-width: 439px;
+}
+
+.sign-up>input::placeholder {
+    color: var(--main-gray-clr);
+    transition: .3s;
+}
+
+.sign-up input:focus::placeholder {
+    opacity: 0;
+}
+
+.error-message {
+    color: #B22222;
+}
