@@ -2,6 +2,9 @@ body {
     background-image: url("../images/pattern.webp");
     background-size: cover;
     background-color: hsl(38, 82%, 60%, .2);
+}
+
+body>.container {
     min-height: 100vh;
 }
 

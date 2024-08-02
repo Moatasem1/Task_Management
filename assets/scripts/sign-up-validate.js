@@ -16,17 +16,43 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
 
-        validateSignUpInputs(signUpFormData);
-
-        //build user account and redirect to home page
+        if (validateSignUpInputs(signUpFormData)) {
+            fetch("http://localhost/GitHub/toDoListApp/controllers/SignupController.php", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: signUpFormData["username"],
+                    password: signUpFormData["password"],
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = '../../index.html';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        };
 
     });
 });
 
 function validateSignUpInputs(signUpFormData) {
     let signUpErrorMessages = document.querySelectorAll("#signUpForm .error-message");
-    signUpErrorMessages[0].innerText = validateUserName(signUpFormData['username']);
-    signUpErrorMessages[1].innerText = validatePassword(signUpFormData['password']);
+
+    let isValid = true;
+
+    result = validateUserName(signUpFormData['username']);
+    isValid = (result !== null) ? false : isValid;
+    signUpErrorMessages[0].innerText = result;
+
+    result = validatePassword(signUpFormData['password']);
+    isValid = (result !== null) ? false : isValid;
+    signUpErrorMessages[1].innerText = result;
+
+    return isValid;
 }
 
 function cleanInput(input) {

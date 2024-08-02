@@ -2,43 +2,36 @@
 
 namespace Models;
 
+require_once "../helpers/utility.php";
+require_once "../models/user.php";
+
 use Helpers\Utility;
 
 class SingUp
 {
-    private $username;
-    private $password;
+    private User $user;
 
-    /**
-     * validation
-     * is username found
-     * is password correct
-     * register
-     */
-
-    public function __construct($username, $password)
+    public function __construct(User $user)
     {
-        $this->username = Utility::cleanInput($username);
-        $this->password = Utility::cleanInput($password);
+        $this->user = $user;
     }
 
-    public function setUserName($username)
+    public function register(): ?string
     {
-        $this->username = Utility::cleanInput($username);
-    }
 
-    public function getUserName()
-    {
-        return $this->username;
-    }
+        $result = $this->user->validateUserName();
 
-    public function setPassword($password)
-    {
-        $this->password = Utility::cleanInput($password);
-    }
+        if ($result !== null) return $result;
 
-    public function getPassword()
-    {
-        return $this->password;
+        $result = $this->user->validatePassword();
+        if ($result !== null) return $result;
+
+        $result = $this->user->isUsernameFound();
+
+        if ($result) return "username is already taken. Please choose another one";
+        if (!$this->user->saveUser())
+            return "something go wrong";
+
+        return null;
     }
 }

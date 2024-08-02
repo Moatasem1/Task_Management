@@ -14,21 +14,21 @@
     <link rel="stylesheet" href="../assets/styles/sign-up.css">
 </head>
 
-<body class="d-flex justify-content-center align-items-center">
-    <main>
+<body>
+    <main class="container d-flex justify-content-center align-items-center">
         <form id="signUpForm" method="post" action=""
-            class="sign-up bg-main-orange w-fit p-5 rounded d-flex flex-column justify-content-center align-items-center text-white">
+            class="sign-up bg-main-orange text-center w-fit p-5 rounded d-flex flex-column justify-content-center align-items-center text-white">
             <h1 class="fw-bold text">Task Management</h1>
             <span class="d-block mb-5 text">Start organizing your life day by day</span>
             <div class="input-group mb-3">
                 <input name="username" minlength="3" minlength="20" required type="text" placeholder="Username"
                     class="d-block w-100 form-control rounded" aria-label="user name">
-                <span class="d-block error-message mt-1"></span>
+                <span class="d-block error-message text-start mt-1"></span>
             </div>
             <div class="input-group">
                 <input name="password" minlength="5" minlength="12" required type="password" placeholder="Password"
                     class="d-block w-100 form-control rounded" aria-label="password">
-                <span class="d-block error-message mt-1"></span>
+                <span class="d-block error-message text-start mt-1"></span>
             </div>
             <input required type="submit" name="sign-up" id="signUpBtn"
                 class="sign-up__btn btn main-btn mt-4 mb-3 w-100" href="#" role="button" value="sign up"></input>
