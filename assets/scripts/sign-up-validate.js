@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
             signUpFormData[key] = cleanInput(signUpFormData[key]);
         });
 
+        document.getElementById("finalErrorMessage").innerText = null;
 
         if (validateSignUpInputs(signUpFormData)) {
             fetch("http://localhost/GitHub/toDoListApp/controllers/SignupController.php", {
@@ -32,6 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (data.success) {
                         window.location.href = '../../index.html';
                     }
+                    else {
+                        document.getElementById("finalErrorMessage").innerText = data.message;
+                    }
                 })
                 .catch(error => console.error('Error:', error));
         };
@@ -44,13 +48,26 @@ function validateSignUpInputs(signUpFormData) {
 
     let isValid = true;
 
+    signUpErrorMessages.forEach(errorMessage => {
+        if (errorMessage.classList.contains("has-error"))
+            errorMessage.classList.remove("has-error");
+    });
+
     result = validateUserName(signUpFormData['username']);
-    isValid = (result !== null) ? false : isValid;
+
+    if (result !== null) {
+        signUpErrorMessages[0].classList.add("has-error");
+        isValid = false;
+    }
     signUpErrorMessages[0].innerText = result;
 
     result = validatePassword(signUpFormData['password']);
-    isValid = (result !== null) ? false : isValid;
+    if (result !== null) {
+        signUpErrorMessages[0].classList.add("has_error");
+        isValid = false;
+    }
     signUpErrorMessages[1].innerText = result;
+
 
     return isValid;
 }

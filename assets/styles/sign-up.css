@@ -23,4 +23,19 @@ body>.container {
 
 .error-message {
     color: #B22222;
+    position: relative;
+    padding-left: .8rem;
+}
+
+.error-message.has-error::before {
+    content: "* ";
+    position: absolute;
+    left: 0;
+    top: 1.5px;
+    color: #B22222;
+    font-size: 1.2rem;
+}
+
+#finalErrorMessage {
+    padding-left: 0;
 }
