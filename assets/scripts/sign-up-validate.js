@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("finalErrorMessage").innerText = null;
 
         if (validateSignUpInputs(signUpFormData)) {
-            fetch("http://localhost/GitHub/toDoListApp/controllers/SignupController.php", {
+            fetch("http://192.168.1.18/GitHub/toDoListApp/controllers/SignupController.php", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
