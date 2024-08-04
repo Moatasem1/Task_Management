@@ -98,4 +98,17 @@ class User
             return null;
         }
     }
+
+    public function authenticateUser(): bool
+    {
+        $sql = "SELECT password_hash FROM users WHERE username = :username;";
+        $stmt = $this->db->excuteQuery($sql, [":username" => $this->username]);
+        $result =  $this->db->fetchQueryStatment($stmt);
+
+        if (empty($result)) {
+            return false;
+        }
+
+        return password_verify($this->password, $result['password_hash']);
+    }
 }

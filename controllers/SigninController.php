@@ -6,12 +6,12 @@ header('Access-Control-Allow-Headers: Content-Type');
 
 session_start();
 
-require_once "../models/sing_up.php";
+require_once "../models/sing_in.php";
 require_once "../models/user.php";
 require_once "../models/tasks_managements_db.php";
 require_once "../config/db_config.php";
 
-use Models\SingUp;
+use Models\SignIn;
 use Models\User;
 use Models\TasksManagementsDB;
 
@@ -19,8 +19,8 @@ function respond($success, $message = '', $username = '')
 {
     $response = [
         'success' => $success,
-        'username' => $username,
         'message' => $message,
+        'username' => $username,
     ];
     echo json_encode($response);
     exit();
@@ -36,8 +36,8 @@ if (!isset($userData['username']) || !isset($userData['password'])) {
 try {
     $db = new TasksManagementsDB($host, $dbname, $username, $password);
     $user = new User($db, $userData["username"], $userData["password"]);
-    $signUp = new SingUp($user);
-    $result = $signUp->register();
+    $signIn = new SignIn($user);
+    $result = $signIn->login();
 
     if ($result === null) {
         $_SESSION["isauthenticat"] = true;

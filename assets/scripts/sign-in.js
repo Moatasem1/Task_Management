@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("finalErrorMessage").innerText = null;
 
         if (validateSignUpInputs(signUpFormData)) {
-            fetch("http://localhost/GitHub/toDoListApp/controllers/SignupController.php", {
+            fetch("http://localhost/GitHub/toDoListApp/controllers/SigninController.php", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -47,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function storeData(data) {
     localStorage.setItem("username", data.username);
 }
-
 
 function validateSignUpInputs(signUpFormData) {
     let signUpErrorMessages = document.querySelectorAll("#signUpForm .error-message");

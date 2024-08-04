@@ -1,0 +1,108 @@
+/* components  */
+body {
+    background-color: #F5DEB3 !important;
+}
+
+.main-btn {
+    background-color: var(--main-red-clr);
+    transition: .3s;
+}
+
+.main-btn:hover,
+.main-btn:focus {
+    background-color: var(--secondary-red-clr);
+}
+
+/* sidebar  */
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    box-shadow: 5px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.header::before {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 0;
+    bottom: -50px;
+    background-color: var(--main-white-clr);
+    transform: translate(-50%, -50%);
+    border-radius: 30%;
+}
+
+.sidebar,
+.header {
+    background-color: var(--main-white-clr);
+}
+
+.add-task-icon {
+    width: 28px;
+    height: 28px;
+}
+
+
+.add-task-btn {
+    border: 1px dashed var(--main-red-clr);
+    transition: .3s;
+}
+
+.add-task-btn:hover {
+    border: 1px dashed var(--secondary-red-clr);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+}
+
+.add-task-icon>i {
+    animation-play-state: paused;
+}
+
+.add-task-btn:hover .add-task-icon>i {
+    animation-play-state: running;
+}
+
+.dashbaord__tab {
+    transition: .3s;
+}
+
+.dashbaord__tab.dashbaord__tab--active,
+.dashbaord__tab:hover,
+.dashbaord__tab:focus {
+    background-color: var(--main-orange-clr);
+    color: white !important;
+    font-weight: 500;
+}
+
+
+/* header  */
+
+/* hero  */
+.hero {
+    height: 232px;
+}
+
+.hero-img-holder {
+    position: absolute;
+    top: 24px;
+    right: 0;
+}
+
+/* tasks  */
+
+.task-icon {
+    transition: .3s;
+}
+
+.task-wrapper {
+    transition: .3s;
+}
+
+.task--checked {
+    background-color: #F5F5F5 !important;
+}
