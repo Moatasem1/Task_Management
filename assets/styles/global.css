@@ -1,5 +1,6 @@
 :root {
     --main-orange-clr: #EDB046;
+    --secondary-orange-clr: #C79A3D;
     --main-white-clr: #ffff;
     --main-red-clr: #BA5112;
     --secondary-red-clr: #953F0E;
@@ -7,14 +8,26 @@
 }
 
 /* components */
-.main-btn {
+.main-btn-orange {
+    background-color: var(--main-orange-clr);
+    color: var(--main-white-clr);
+}
+
+.main-btn-orange:focus,
+.main-btn-orange:hover {
+    background-color: var(--secondary-orange-clr);
+    color: var(--main-white-clr) !important;
+}
+
+.main-btn-red {
     background-color: var(--main-red-clr);
     color: var(--main-white-clr);
 }
 
-.main-btn:focus,
-.main-btn:hover {
+.main-btn-red:focus,
+.main-btn-red:hover {
     background-color: var(--secondary-red-clr);
+    color: var(--main-white-clr) !important;
 }
 
 
