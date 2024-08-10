@@ -58,4 +58,9 @@ class TasksManagementsDB
 
         return null;
     }
+
+    function getLastInsertId()
+    {
+        return $this->connection->lastInsertId();
+    }
 }

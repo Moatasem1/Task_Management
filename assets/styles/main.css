@@ -106,3 +106,18 @@ body {
 .task--checked {
     background-color: #F5F5F5 !important;
 }
+
+.task-text:focus {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.task.task--edit-mode {
+    background-color: #f0f8ff;
+    border: 1px dashed var(--main-orange-clr);
+}
+
+.task.task--edit-mode .edit-task-btn {
+    display: none;
+}

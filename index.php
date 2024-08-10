@@ -77,11 +77,11 @@ if (!(isset($_SESSION["isauthenticat"]) && $_SESSION["isauthenticat"])) {
                         <span id="DeleteAllTasks" role="button" class="text-main-red">Delete all</span>
                     </div>
                     <ul id="TasksParent" class="list-unstyled mt-3">
-                        <li class="shadow-sm bg-main-white rounded mb-3 d-flex align-items-center task">
+                        <li class="task shadow-sm bg-main-white rounded mb-3 d-flex align-items-center">
                             <input id="taskid1" type="checkbox" class="task__input d-none" value="Buy monthly groceries">
-                            <label role="button" for="taskid1" class="w-100 p-3">
-                                <i class="task-icon text-main-orange fa-regular fa-square me-2"></i>
-                                <span class="">Buy monthly groceries</span>
+                            <label role="button" for="taskid1" class="w-100 p-3 d-flex align-items-center gap-2">
+                                <i class="task-icon text-main-orange fa-regular fa-square"></i>
+                                <span class="task-text w-100">Buy monthly groceries</span>
                             </label>
                             <i role="button" class="fa-solid fa-pen-to-square text-main-orange me-3 edit-task-btn"></i>
                             <i role="button" class="fa-solid fa-trash text-main-orange me-3 delete-task-btn"></i>
