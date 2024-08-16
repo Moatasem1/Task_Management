@@ -1,40 +1,48 @@
-
-import { TaskManager } from './TaskManager.js';
+import { TaskManager } from './task_manager.js';
 
 document.addEventListener("DOMContentLoaded", () => {
 
     function printUserNameIn(userNameElId) {
         let userNameEl = document.getElementById(userNameElId);
         let userName = localStorage.getItem('username');
+        let userId = localStorage.getItem('userId');
         userNameEl.innerText = userName + '!';
     }
-    function handelAddTaskModal() {
-        let addTaskModalElement = document.getElementById("addTaskModal");
-        const addTaskModal = new bootstrap.Modal(addTaskModalElement);
+    function handelAddTaskModal(taskModelObj) {
+
         let taskNameElement = document.getElementById("taskName");
 
-        let task = new Task(taskNameElement.value);
-        task.addTask();
+        let task = new TaskManager();
+        task.setName(taskNameElement.value);
+        task.createTask(localStorage.getItem('userId'));
         taskNameElement.value = '';
-        addTaskModal.hide();
+        taskModelObj.hide();
     }
     function deleteAllTasksWhenClickOn(deleteAllTasksBtnID) {
         let deleteAllTasksBtn = document.getElementById(deleteAllTasksBtnID);
 
         deleteAllTasksBtn.addEventListener("click", () => {
-            Task.deleteAllTasks();
+            TaskManager.deleteAllTasks();
         });
     }
-    function addNewTaskWehnClickOn(addNewTaskElId) {
-        let SaveTaskBtn = document.getElementById(SaveTaskBtn);
-        SaveTaskBtn.addEventListener("click", () => {
-            handelAddTaskModal();
+    function addNewTaskWehnClickOn(saveTaskBtnId) {
+
+        let addTaskModalElement = document.getElementById("addTaskModal");
+        let saveTaskBtn = document.getElementById(saveTaskBtnId);
+        const addTaskModal = new bootstrap.Modal(addTaskModalElement);
+
+        saveTaskBtn.addEventListener("click", () => {
+            handelAddTaskModal(addTaskModal);
         });
+    }
+
+    function getAllTasks(userId) {
+        TaskManager.addAllTasks(userId);
     }
 
     printUserNameIn("userName");
 
-    Task.parentElement = document.getElementById("TasksParent");
+    getAllTasks(localStorage.getItem('userId'));
 
     deleteAllTasksWhenClickOn("DeleteAllTasks");
 

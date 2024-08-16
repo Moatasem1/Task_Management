@@ -15,13 +15,15 @@ use Models\SignIn;
 use Models\User;
 use Models\TasksManagementsDB;
 
-function respond($success, $message = '', $username = '')
+function respond($success, $message = '', $username = '', $userId = null)
 {
     $response = [
         'success' => $success,
         'message' => $message,
         'username' => $username,
+        'userId' => $userId
     ];
+
     echo json_encode($response);
     exit();
 }
@@ -41,7 +43,9 @@ try {
 
     if ($result === null) {
         $_SESSION["isauthenticat"] = true;
-        respond(true, '', $user->getUserName());
+        $user = User::getUserByUserName($db, $userData["username"]);
+        if ($user)
+            respond(true, '', $user->getUserName(), $user->getUserId());
     } else {
         respond(false, $result);
     }

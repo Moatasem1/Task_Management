@@ -48,4 +48,12 @@ class Task
 
         return false;
     }
+
+    static public function getAllTasks(TasksManagementsDB $db, int $userId)
+    {
+        $sql = "SELECT id,task_name from tasks where user_id = :user_id";
+        $stmt =  $db->excuteQuery($sql, [':user_id' => $userId]);
+
+        return $db->fetchQueryStatment($stmt);
+    }
 }

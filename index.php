@@ -77,7 +77,7 @@ if (!(isset($_SESSION["isauthenticat"]) && $_SESSION["isauthenticat"])) {
                         <span id="DeleteAllTasks" role="button" class="text-main-red">Delete all</span>
                     </div>
                     <ul id="TasksParent" class="list-unstyled mt-3">
-                        <li class="task shadow-sm bg-main-white rounded mb-3 d-flex align-items-center">
+                        <!-- <li class="task shadow-sm bg-main-white rounded mb-3 d-flex align-items-center">
                             <input id="taskid1" type="checkbox" class="task__input d-none" value="Buy monthly groceries">
                             <label role="button" for="taskid1" class="w-100 p-3 d-flex align-items-center gap-2">
                                 <i class="task-icon text-main-orange fa-regular fa-square"></i>
@@ -85,7 +85,7 @@ if (!(isset($_SESSION["isauthenticat"]) && $_SESSION["isauthenticat"])) {
                             </label>
                             <i role="button" class="fa-solid fa-pen-to-square text-main-orange me-3 edit-task-btn"></i>
                             <i role="button" class="fa-solid fa-trash text-main-orange me-3 delete-task-btn"></i>
-                        </li>
+                        </li> -->
                     </ul>
                 </section>
             </section>
@@ -115,7 +115,7 @@ if (!(isset($_SESSION["isauthenticat"]) && $_SESSION["isauthenticat"])) {
         </div>
     </div>
 
-    <script src="assets/scripts/home.js"></script>
+    <script type="module" src="assets/scripts/main.js"></script>
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 

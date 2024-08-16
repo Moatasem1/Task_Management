@@ -3,6 +3,7 @@
 namespace Models;
 
 require_once "../helpers/utility.php";
+require_once "tasks_managements_db.php";
 
 use Helpers\Utility;
 use Models\TasksManagementsDB;
@@ -11,18 +12,40 @@ use PDO;
 class User
 {
     private TasksManagementsDB $db;
+    private int|null $userId;
     private string $username;
     private string $password;
 
     //define task class later
     private $tasks = [];
 
-    public function __construct(TasksManagementsDB $db, string $username, string $password, $tasks = [])
+    public function __construct(TasksManagementsDB $db, string $username, string $password, $userId = null, $tasks = [])
     {
         $this->db = $db;
         $this->setUserName($username);
         $this->setPassword($password);
+        $this->userId = $userId;
         $this->tasks = $tasks;
+    }
+
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    static public function getUserByUserName(TasksManagementsDB $db, string $userName)
+    {
+        $sql = 'SELECT id,username,password_hash from users where username = :username ';
+        $stmt = $db->excuteQuery($sql, [":username" => $userName]);
+        $result = $db->fetchQueryStatment($stmt);
+
+        if (!$result) {
+            return null;
+        }
+
+        $result = $result[0];
+
+        return new User($db, $userName, $result["password_hash"], $result["id"]);
     }
 
     public function setUserName(string $username): void
@@ -61,6 +84,8 @@ class User
         $sql = "INSERT Into users (username,password_hash) Values (:username,:password_hash);";
 
         $stmt = $this->db->excuteQuery($sql, [":username" => $this->username, ":password_hash" => Utility::hashPassword($this->password)]);
+
+        $this->userId = $this->db->getLastInsertId();
 
         if ($stmt->rowCount() > 0)
             return true;
@@ -109,6 +134,6 @@ class User
             return false;
         }
 
-        return password_verify($this->password, $result['password_hash']);
+        return password_verify($this->password, $result[0]['password_hash']);
     }
 }

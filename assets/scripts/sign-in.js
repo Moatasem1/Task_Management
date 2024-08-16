@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function storeData(data) {
     localStorage.setItem("username", data.username);
+    localStorage.setItem("userId", data.userId);
 }
 
 function validateSignUpInputs(signUpFormData) {
@@ -94,10 +95,6 @@ function validateUserName(username) {
         return "username length between 3 and 20 characters";
     else
         return null;
-}
-
-function isUserFound(username) {
-    //send request to backend and return true or false
 }
 
 function validatePassword(password) {

@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function storeData(data) {
     localStorage.setItem("username", data.username);
+    localStorage.setItem("userId", data.userId);
 }
 
 

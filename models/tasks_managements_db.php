@@ -51,7 +51,7 @@ class TasksManagementsDB
     public function fetchQueryStatment($stmt, $fetchMode = PDO::FETCH_ASSOC)
     {
         if (!empty($stmt)) {
-            $result = $stmt->fetch($fetchMode);
+            $result = $stmt->fetchAll($fetchMode);
 
             return $result;
         }

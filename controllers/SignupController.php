@@ -15,13 +15,15 @@ use Models\SingUp;
 use Models\User;
 use Models\TasksManagementsDB;
 
-function respond($success, $message = '', $username = '')
+function respond($success, $message = '', $username = '', $userId = null)
 {
     $response = [
         'success' => $success,
-        'username' => $username,
         'message' => $message,
+        'username' => $username,
+        'userId' => $userId
     ];
+
     echo json_encode($response);
     exit();
 }
@@ -41,7 +43,7 @@ try {
 
     if ($result === null) {
         $_SESSION["isauthenticat"] = true;
-        respond(true, '', $user->getUserName());
+        respond(true, '', $user->getUserName(), $user->getUserId());
     } else {
         respond(false, $result);
     }
