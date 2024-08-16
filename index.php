@@ -34,19 +34,19 @@ if (!(isset($_SESSION["isauthenticat"]) && $_SESSION["isauthenticat"])) {
             </button>
             <ul class="text-capitalize list-unstyled mt-5 d-flex flex-column gap-3">
                 <li>
-                    <a class="d-block text-decoration-none text-black p-3 text-start dashbaord__tab dashbaord__tab--active rounded" href="">
+                    <a id="allFilterBtn" filter="all" role="button" class="filter-btn d-block text-decoration-none text-black p-3 text-start dashbaord__tab dashbaord__tab--active rounded">
                         <i class="fa-solid fa-chart-line me-2"></i>
                         <span>dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a class="d-block text-decoration-none text-black p-3 text-start dashbaord__tab rounded" href="">
+                    <a id="activeFilterBtn" filter="active" role="button" class="filter-btn d-block text-decoration-none text-black p-3 text-start dashbaord__tab rounded">
                         <i class="fa-solid fa-clock me-2"></i>
                         <span>active</span>
                     </a>
                 </li>
                 <li>
-                    <a class="d-block text-decoration-none text-black p-3 text-start dashbaord__tab  rounded" href="">
+                    <a id="completeFilterBtn" filter="complete" class="filter-btn d-block text-decoration-none text-black p-3 text-start dashbaord__tab  rounded" role="button">
                         <i class="fa-solid fa-circle-check me-2"></i>
                         <span>completed</span>
                     </a>
@@ -74,7 +74,7 @@ if (!(isset($_SESSION["isauthenticat"]) && $_SESSION["isauthenticat"])) {
                 <section class="tasks mt-5">
                     <div class="tasks__text-wrapper text-capitalize d-flex align-items-center justify-content-between">
                         <h3 class="">Today's Tasks</h3>
-                        <span id="DeleteAllTasks" role="button" class="text-main-red">Delete all</span>
+                        <span id="openDeleteAllTaskModalBtn" data-bs-toggle="modal" data-bs-target="#deleteAllTaskModal" role="button" class="text-main-red">Delete all</span>
                     </div>
                     <ul id="TasksParent" class="list-unstyled mt-3">
                         <!-- <li class="task shadow-sm bg-main-white rounded mb-3 d-flex align-items-center">
@@ -92,7 +92,7 @@ if (!(isset($_SESSION["isauthenticat"]) && $_SESSION["isauthenticat"])) {
         </section>
     </div>
 
-    <!-- Modals -->
+    <!-- add task Modal -->
     <div class="modal fade" data-bs-backdrop="static" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -110,6 +110,24 @@ if (!(isset($_SESSION["isauthenticat"]) && $_SESSION["isauthenticat"])) {
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cancel</button>
                     <button id="SaveTaskBtn" type="button" class="btn main-btn-red">add task</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- delete all -->
+    <div class="modal fade" data-bs-backdrop="static" id="deleteAllTaskModal" tabindex="-1" aria-labelledby="deleteAllTaskModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title text-capitalize fs-5 fw-semibold" id="deleteAllTaskModal">delete all tasks</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <span>Please note that this action will delete all tasks, and they cannot be restored. Are you sure you want to delete them?</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cancel</button>
+                    <button id="deleteAllTasksBtn" type="button" class="btn main-btn-red">delete all</button>
                 </div>
             </div>
         </div>

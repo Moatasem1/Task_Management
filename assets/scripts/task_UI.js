@@ -31,8 +31,15 @@ export class TaskUI {
         return taskElement;
     }
 
-    createTask(taskId, taskName) {
+    createTask(taskId, taskName, taskStatus) {
         this.#taskElement = this.#createTaskElement(taskId, taskName);
+
+        let taskInput = this.#taskElement.querySelector(".task__input");
+
+        if (taskStatus === '1') {
+            this.checkedTask();
+            taskInput.checked = true;
+        }
 
         TaskUI.parentElement.appendChild(this.#taskElement);
     }
@@ -48,12 +55,42 @@ export class TaskUI {
         taskText.focus();
         this.#taskElement.classList.add("task--edit-mode");
 
-        taskText.addEventListener("blur", () => {
-            taskText.contentEditable = false;
-            this.#taskElement.classList.remove("task--edit-mode");
+        return new Promise((resolve) => {
+            taskText.addEventListener("blur", () => {
+                taskText.contentEditable = false;
+                this.#taskElement.classList.remove("task--edit-mode");
+                resolve(taskText.innerText);
+            }, { once: true });
         });
+    }
 
-        return taskText.innerText;
+    checkedTask() {
+        let taskIcon = this.#taskElement.querySelector(".task-icon");
+        taskIcon.classList.remove('fa-regular', 'fa-square');
+        taskIcon.classList.add('fa-solid', 'fa-square-check');
+        this.#taskElement.classList.add('task--checked');
+    }
+
+    uncheckedTask() {
+        let taskIcon = this.#taskElement.querySelector(".task-icon");
+        taskIcon.classList.remove('fa-solid', 'fa-square-check');
+        taskIcon.classList.add('fa-regular', 'fa-square');
+        this.#taskElement.classList.remove('task--checked');
+    }
+
+    handelCheckedTask() {
+        let taskInput = this.#taskElement.querySelector(".task__input");
+        let checkedStatusValue = 1;
+
+        if (taskInput.checked) {
+            this.uncheckedTask();
+            checkedStatusValue = 0;
+
+        } else {
+            this.checkedTask();
+        }
+
+        return checkedStatusValue;
     }
 
     static deteletAllTasks() {

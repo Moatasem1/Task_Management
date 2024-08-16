@@ -4,15 +4,17 @@ import { TaskApi } from "./task_api.js";
 
 export class TaskManager {
 
+    #userId;
     #taskId;
     #taskName;
     #taskUI;
     #taskApi;
 
-    constructor() {
+    constructor(userId = null, taskId = null) {
         this.#taskUI = new TaskUI();
         this.#taskApi = new TaskApi();
-        this.#taskId = null;
+        this.#userId = userId;
+        this.#taskId = taskId;
     }
 
     setName(taskName) {
@@ -40,13 +42,13 @@ export class TaskManager {
     }
 
     deleteTask() {
-        //call delete api
+        this.#taskApi.deleteTask(this.#taskId, this.#userId);
         this.#taskUI.removeTask();
     }
 
-    updateTask() {
-        this.#taskName = this.#taskUI.editTask();
-        //call edit api
+    async updateTask() {
+        this.#taskName = await this.#taskUI.editTask();
+        let result = this.#taskApi.updateTaskName(this.#taskName, this.#taskId, this.#userId);
     }
 
     static addAllTasks(userId) {
@@ -58,38 +60,36 @@ export class TaskManager {
                 return;
 
             tasks.forEach(task => {
-                let taskManger = new TaskManager();
-                taskManger.getTaskUI().createTask(task["id"], task["task_name"]);
+                let taskManger = new TaskManager(userId, task["id"]);
+                taskManger.getTaskUI().createTask(task["id"], task["task_name"], task['status']);
                 taskManger.addAllListners();
             });
         });
 
     }
 
-    static deleteAllTasks() {
-        //call api to delete all tasks
-        TaskUI.deteletAllTasks();
+    static deleteAllTasks(userId) {
+
+        let taskApi = new TaskApi();
+        if (taskApi.deleteAllTasks(userId)) {
+
+            TaskUI.deteletAllTasks(userId);
+        }
+    }
+
+    handelCheckedTask() {
+        let checkedStatusValue = this.#taskUI.handelCheckedTask();
+
+        this.#taskApi.updateTaskStatus(checkedStatusValue, this.#taskId, this.#userId);
     }
 
     //listners
     #addCheckedkListner() {
-
         let taskElement = this.#taskUI.getTaskElement();
         let taskLabe = taskElement.querySelector("label");
 
         taskLabe.addEventListener("click", () => {
-
-            let taskIcon = taskElement.querySelector(".task-icon");
-            let taskInput = taskElement.querySelector(".task__input");
-
-            if (taskInput.checked) {
-                taskIcon.classList.remove('fa-solid', 'fa-square-check');
-                taskIcon.classList.add('fa-regular', 'fa-square');
-            } else {
-                taskIcon.classList.remove('fa-regular', 'fa-square');
-                taskIcon.classList.add('fa-solid', 'fa-square-check');
-            }
-            taskElement.classList.toggle('task--checked');
+            this.handelCheckedTask();
         });
     }
 
@@ -103,7 +103,6 @@ export class TaskManager {
 
     #addEditListner() {
         let taskElement = this.#taskUI.getTaskElement();
-        console.log(taskElement);
         let editTaskBtn = taskElement.querySelector(".edit-task-btn");
 
         editTaskBtn.addEventListener("click", () => {
