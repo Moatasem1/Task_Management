@@ -121,3 +121,17 @@ body {
 .task.task--edit-mode .edit-task-btn {
     display: none;
 }
+
+.user-img {
+    border: var(--main-red-clr) 2px solid;
+    padding: .2rem;
+}
+
+.user-info-group {
+    border-bottom: var(--main-red-clr) 4px solid;
+}
+
+.offcanvas-user-profile {
+    border-left: 2px solid var(--main-red-clr);
+    background-color: #f5deb3 !important;
+}

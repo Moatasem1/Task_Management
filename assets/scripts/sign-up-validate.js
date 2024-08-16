@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: JSON.stringify({
                     username: signUpFormData["username"],
                     password: signUpFormData["password"],
+                    email: signUpFormData["email"],
                 }),
             })
                 .then(response => response.json())
@@ -49,7 +50,6 @@ function storeData(data) {
     localStorage.setItem("userId", data.userId);
 }
 
-
 function validateSignUpInputs(signUpFormData) {
     let signUpErrorMessages = document.querySelectorAll("#signUpForm .error-message");
 
@@ -60,6 +60,7 @@ function validateSignUpInputs(signUpFormData) {
             errorMessage.classList.remove("has-error");
     });
 
+    //validate username
     result = validateUserName(signUpFormData['username']);
 
     if (result !== null) {
@@ -68,15 +69,49 @@ function validateSignUpInputs(signUpFormData) {
     }
     signUpErrorMessages[0].innerText = result;
 
-    result = validatePassword(signUpFormData['password']);
+    //validate email
+    result = validateEmail(signUpFormData['email']);
+    console.log(signUpFormData['email'] + result);
     if (result !== null) {
-        signUpErrorMessages[0].classList.add("has_error");
+        signUpErrorMessages[1].classList.add("has-error");
         isValid = false;
     }
     signUpErrorMessages[1].innerText = result;
 
+    result = validatePassword(signUpFormData['password']);
+    if (result !== null) {
+        signUpErrorMessages[2].classList.add("has-error");
+        isValid = false;
+    }
+    signUpErrorMessages[2].innerText = result;
+
+    result = PasswordConfirmed(signUpFormData['password'], signUpFormData['confirm-password']);
+    if (result !== null) {
+        signUpErrorMessages[3].classList.add("has-error");
+        isValid = false;
+    }
+    signUpErrorMessages[3].innerText = result;
+
 
     return isValid;
+}
+
+function validateEmail(email) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!email)
+        return "email can't be empty";
+    else if (!emailRegex.test(email)) {
+        return "email not valid";
+    }
+
+    return null;
+}
+
+function PasswordConfirmed(password, confirmedPassword2) {
+    if (password === confirmedPassword2)
+        return null;
+    return "passwords do not match";
 }
 
 function cleanInput(input) {

@@ -23,6 +23,8 @@ class SingUp
 
         if ($result !== null) return $result;
 
+        //validate Email here
+
         $result = $this->user->validatePassword();
         if ($result !== null) return $result;
 

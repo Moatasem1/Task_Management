@@ -31,13 +31,14 @@ function respond($success, $message = '', $username = '', $userId = null)
 $userInput  = file_get_contents('php://input');
 $userData = json_decode($userInput, true);
 
-if (!isset($userData['username']) || !isset($userData['password'])) {
+if (!isset($userData['username']) || !isset($userData['password']) || !isset($userData["email"])) {
     respond(false, 'Invalid input');
 }
 
 try {
     $db = new TasksManagementsDB($host, $dbname, $username, $password);
     $user = new User($db, $userData["username"], $userData["password"]);
+    $user->setEmail($userData["email"]);
     $signUp = new SingUp($user);
     $result = $signUp->register();
 

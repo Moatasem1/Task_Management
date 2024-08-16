@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
         taskNameElement.value = '';
         taskModelObj.hide();
     }
-
     function addNewTaskWehnClickOn(saveTaskBtnId) {
 
         let addTaskModalElement = document.getElementById("addTaskModal");
@@ -36,14 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let deleteAllTaskModalElement = document.getElementById("deleteAllTaskModal");
         const deleteAllTaskModal = new bootstrap.Modal(deleteAllTaskModalElement);
-        deleteAllTasksBtn = document.getElementById(deleteAllTasksBtnId);
+        let deleteAllTasksBtn = document.getElementById(deleteAllTasksBtnId);
 
         deleteAllTasksBtn.addEventListener("click", () => {
             TaskManager.deleteAllTasks(localStorage.getItem('userId'));
             deleteAllTaskModal.hide();
         });
     }
-
     function filterTasks(filterType = "all") {
         let tasks = document.querySelectorAll(".task");
         filterType = filterType.toLowerCase();
@@ -65,7 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-
     function handleTasksFilter() {
         let filterBtns = document.querySelectorAll(".filter-btn");
 

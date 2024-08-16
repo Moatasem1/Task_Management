@@ -25,9 +25,20 @@
                     class="d-block w-100 form-control rounded" aria-label="user name">
                 <span class="d-block error-message text-start mt-1"></span>
             </div>
-            <div class="input-group mb-2">
+            <div class="input-group mb-3">
+                <input name="email" required type="text" placeholder="Email" class="d-block w-100 form-control rounded"
+                    aria-label="email">
+                <span class="d-block error-message text-start mt-1"></span>
+            </div>
+            <div class="input-group mb-3">
                 <input name="password" minlength="5" minlength="12" required type="password" placeholder="Password"
                     class="d-block w-100 form-control rounded" aria-label="password">
+                <span class="d-block error-message error-message text-start mt-1"></span>
+            </div>
+            <div class="input-group mb-2">
+                <input name="confirm-password" minlength="5" minlength="12" required type="password"
+                    placeholder="Confirm Password" class="d-block w-100 form-control rounded"
+                    aria-label="confirm password">
                 <span class="d-block error-message error-message text-start mt-1"></span>
             </div>
             <span id="finalErrorMessage" class="d-block error-message text-center"></span>

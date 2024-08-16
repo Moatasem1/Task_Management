@@ -16,6 +16,8 @@ class User
     private string $username;
     private string $password;
 
+    private string $email;
+
     //define task class later
     private $tasks = [];
 
@@ -68,6 +70,16 @@ class User
         return $this->password;
     }
 
+    public function setEmail(string $email): void
+    {
+        $this->email = Utility::cleanInput($email);
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
     public function isUsernameFound(): bool
     {
         $sql = "SELECT 1 FROM users where username = :username;";
@@ -81,9 +93,9 @@ class User
 
     public function saveUser(): bool
     {
-        $sql = "INSERT Into users (username,password_hash) Values (:username,:password_hash);";
+        $sql = "INSERT Into users (username,password_hash,email) Values (:username,:password_hash,:email);";
 
-        $stmt = $this->db->excuteQuery($sql, [":username" => $this->username, ":password_hash" => Utility::hashPassword($this->password)]);
+        $stmt = $this->db->excuteQuery($sql, [":username" => $this->username, ":password_hash" => Utility::hashPassword($this->password), ":email" => $this->email]);
 
         $this->userId = $this->db->getLastInsertId();
 

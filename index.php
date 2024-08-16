@@ -56,10 +56,16 @@ if (!(isset($_SESSION["isauthenticat"]) && $_SESSION["isauthenticat"])) {
         <section class="main w-100">
             <header class="header sticky-top py-3 px-4 d-flex justify-content-between align-items-center">
                 <h1 class="fs-3 text-capitalize">dashboard</h1>
-                <a href="controllers/sign_out.php" type="button" name="" id="" class="btn text-white main-btn-red d-flex align-items-center gap-2">
-                    <span class="text-capitalize">Sign out</span>
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                </a>
+                <div class="d-flex align-items-center gap-3">
+                    <div role="button" class="d-flex align-items-center gap-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUserProfile" aria-controls="offcanvasUserProfile">
+                        <img class="user-img rounded-pill" width="40" class="img-fluid" src="https://cdn-icons-png.freepik.com/512/7139/7139450.png" alt="use image not found">
+                        <i class="fa-solid fa-circle-chevron-down text-main-red"></i>
+                    </div>
+                    <a href="controllers/sign_out.php" type="button" name="" id="" class="btn text-white main-btn-red d-flex align-items-center gap-2">
+                        <span class="text-capitalize">Sign out</span>
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </a>
+                </div>
             </header>
             <section class="content px-4 py-5">
                 <div class="hero bg-main-white shadow-sm position-relative px-5 rounded d-flex align-items-center">
@@ -114,7 +120,7 @@ if (!(isset($_SESSION["isauthenticat"]) && $_SESSION["isauthenticat"])) {
             </div>
         </div>
     </div>
-    <!-- delete all -->
+    <!-- delete all modal -->
     <div class="modal fade" data-bs-backdrop="static" id="deleteAllTaskModal" tabindex="-1" aria-labelledby="deleteAllTaskModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -128,6 +134,31 @@ if (!(isset($_SESSION["isauthenticat"]) && $_SESSION["isauthenticat"])) {
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cancel</button>
                     <button id="deleteAllTasksBtn" type="button" class="btn main-btn-red">delete all</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- offcanvas User profile -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasUserProfile" aria-labelledby="offcanvasUserProfile">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasUserProfile">Your Account Info</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="text-center">
+                <img class="user-img rounded-pill" width="120" class="img-fluid" src="https://cdn-icons-png.freepik.com/512/7139/7139450.png" alt="use image not found">
+                <div class="user-info-group p-3 d-flex align-items-center gap-2 mt-4 ">
+                    <span class="fw-semibold">username:</span>
+                    <span>moatasem</span>
+                </div>
+                <div class="user-info-group p-3 d-flex align-items-center gap-2 mt-3 ">
+                    <span class="fw-semibold">email:</span>
+                    <span>moatasemalnaimat@gmail.com</span>
+                </div>
+                <div class="user-info-group p-3 d-flex align-items-center gap-2 mt-3 ">
+                    <span class="fw-semibold">password:</span>
+                    <span></span>
                 </div>
             </div>
         </div>
