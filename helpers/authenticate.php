@@ -3,7 +3,7 @@ function isUserVerified()
 {
     if (isset($_SESSION["isRegister"]) && $_SESSION["isRegister"]) {
         return  true;
-    } else if (isset($_SESSION["isLoggedIn"]) && $_SESSION["isLoggedIn"])
+    } else if (isset($_SESSION["isLoggedIn"]) && $_SESSION["isLoggedIn"] && isset($_SESSION["is2FPass"]) && $_SESSION["is2FPass"])
         return true;
 
     return false;
@@ -19,5 +19,3 @@ function verifyRecaptcha($recaptchaResponse)
 
     return $responseKeys["success"];
 }
-
-// && isset($_SESSION["is2FPass"]) && $_SESSION["is2FPass"]

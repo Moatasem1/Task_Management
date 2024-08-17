@@ -18,6 +18,8 @@ class User
 
     private string $email;
 
+    private $twoFactorSecretKey;
+
     //define task class later
     private $tasks = [];
 
@@ -59,6 +61,15 @@ class User
     {
         return $this->username;
     }
+    public function settwoFactorSecretKey(string $twoFactorSecretKey): void
+    {
+        $this->twoFactorSecretKey = Utility::cleanInput($twoFactorSecretKey);
+    }
+
+    public function gettwoFactorSecretKey(): string
+    {
+        return $this->twoFactorSecretKey;
+    }
 
     public function setPassword(string $password): void
     {
@@ -93,9 +104,14 @@ class User
 
     public function saveUser(): bool
     {
-        $sql = "INSERT Into users (username,password_hash,email) Values (:username,:password_hash,:email);";
+        $sql = "INSERT Into users (username,password_hash,email,two_factor_secret_key) Values (:username,:password_hash,:email,:twoFactorSecretKey);";
 
-        $stmt = $this->db->excuteQuery($sql, [":username" => $this->username, ":password_hash" => Utility::hashPassword($this->password), ":email" => $this->email]);
+        $stmt = $this->db->excuteQuery($sql, [
+            ":username" => $this->username,
+            ":password_hash" => Utility::hashPassword($this->password),
+            ":email" => $this->email,
+            ":twoFactorSecretKey" => $this->twoFactorSecretKey
+        ]);
 
         $this->userId = $this->db->getLastInsertId();
 
@@ -147,5 +163,20 @@ class User
         }
 
         return password_verify($this->password, $result[0]['password_hash']);
+    }
+
+    static function getTwoFactorSecretKeyFromDB(TasksManagementsDB $db, int $userId)
+    {
+        $sql = 'SELECT two_factor_secret_key from users where id = :userId ';
+        $stmt = $db->excuteQuery($sql, [":userId" => $userId]);
+        $result = $db->fetchQueryStatment($stmt);
+
+        if (!$result) {
+            return null;
+        }
+
+        $result = $result[0];
+
+        return $result["two_factor_secret_key"];
     }
 }

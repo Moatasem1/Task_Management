@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         .then(data => {
                             if (data.success) {
                                 storeData(data);
-                                window.location.href = '../index.php';
+                                window.location.href = '2FA.php';
                             }
                             else {
                                 document.getElementById("finalErrorMessage").innerText = data.message;

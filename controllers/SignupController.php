@@ -10,6 +10,9 @@ require_once "../models/sing_up.php";
 require_once "../models/user.php";
 require_once "../models/tasks_managements_db.php";
 require_once "../config/db_config.php";
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use PHPGangsta\GoogleAuthenticator;
 
 use Models\SingUp;
 use Models\User;
@@ -50,11 +53,15 @@ if (!verifyRecaptcha($userData['recaptcha_response'])) {
 }
 
 try {
+    $ga = new PHPGangsta_GoogleAuthenticator();
+    $secret = $ga->createSecret();
     $db = new TasksManagementsDB($host, $dbname, $username, $password);
     $user = new User($db, $userData["username"], $userData["password"]);
     $user->setEmail($userData["email"]);
+    $user->settwoFactorSecretKey($secret);
     $signUp = new SingUp($user);
     $result = $signUp->register();
+
 
     if ($result === null) {
         $_SESSION["isRegister"] = true;
