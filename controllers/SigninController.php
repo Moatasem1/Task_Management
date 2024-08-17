@@ -31,9 +31,19 @@ function respond($success, $message = '', $username = '', $userId = null)
 $userInput  = file_get_contents('php://input');
 $userData = json_decode($userInput, true);
 
-if (!isset($userData['username']) || !isset($userData['password'])) {
+if (
+    !isset($userData['username']) || !isset($userData['password']) ||
+    !isset($userData["recaptcha_response"])
+) {
     respond(false, 'Invalid input');
 }
+
+// Function to verify reCAPTCHA token
+require_once "../helpers/authenticate.php";
+if (!verifyRecaptcha($userData['recaptcha_response'])) {
+    respond(false, 'reCAPTCHA verification failed');
+}
+
 
 try {
     $db = new TasksManagementsDB($host, $dbname, $username, $password);
@@ -42,7 +52,7 @@ try {
     $result = $signIn->login();
 
     if ($result === null) {
-        $_SESSION["isauthenticat"] = true;
+        $_SESSION["isLoggedIn"] = true;
         $user = User::getUserByUserName($db, $userData["username"]);
         if ($user)
             respond(true, '', $user->getUserName(), $user->getUserId());

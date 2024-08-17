@@ -18,29 +18,33 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("finalErrorMessage").innerText = null;
 
         if (validateSignUpInputs(signUpFormData)) {
-            fetch("http://localhost/GitHub/toDoListApp/controllers/SignupController.php", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: signUpFormData["username"],
-                    password: signUpFormData["password"],
-                    email: signUpFormData["email"],
-                }),
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        storeData(data);
-                        window.location.href = '../index.php';
-                    }
-                    else {
-                        document.getElementById("finalErrorMessage").innerText = data.message;
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        };
+            // Execute reCAPTCHA and get the token
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6LeMuigqAAAAADlvlCYys5m3xgcswPKjc5JZiuMj', { action: 'submit' }).then(function (token) {
+                    // Add the reCAPTCHA token to the form data
+                    signUpFormData['recaptcha_response'] = token;
+
+                    // Make the API request
+                    fetch('http://localhost/GitHub/toDoListApp/controllers/SignupController.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(signUpFormData),
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                storeData(data);
+                                window.location.href = '../index.php';
+                            } else {
+                                document.getElementById('finalErrorMessage').innerText = data.message;
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                });
+            });
+        }
 
     });
 });

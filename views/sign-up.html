@@ -17,38 +17,44 @@
 <body>
     <main class="container d-flex justify-content-center align-items-center">
         <form id="signUpForm" method="post" action=""
-            class="sign-up bg-main-orange text-center w-fit p-5 rounded d-flex flex-column justify-content-center align-items-center text-white">
+            class="sign-up bg-main-orange text-center w-100 p-5 rounded d-flex flex-column justify-content-center align-items-center text-white">
             <h1 class="fw-bold text">Task Management</h1>
             <span class="d-block mb-5 text">Start organizing your life day by day</span>
-            <div class="input-group mb-3">
+            <div class="input-group mb-4">
                 <input name="username" minlength="3" minlength="20" required type="text" placeholder="Username"
-                    class="d-block w-100 form-control rounded" aria-label="user name">
-                <span class="d-block error-message text-start mt-1"></span>
+                    class="d-block w-100 form-control rounded py-2" aria-label="user name">
+                <span class="d-block error-message text-start "></span>
             </div>
-            <div class="input-group mb-3">
-                <input name="email" required type="text" placeholder="Email" class="d-block w-100 form-control rounded"
-                    aria-label="email">
-                <span class="d-block error-message text-start mt-1"></span>
+            <div class="input-group mb-4">
+                <input name="email" required type="email" placeholder="Email"
+                    class="d-block w-100 form-control rounded py-2" aria-label="email">
+                <span class="d-block error-message text-start"></span>
             </div>
-            <div class="input-group mb-3">
-                <input name="password" minlength="5" minlength="12" required type="password" placeholder="Password"
-                    class="d-block w-100 form-control rounded" aria-label="password">
-                <span class="d-block error-message error-message text-start mt-1"></span>
-            </div>
-            <div class="input-group mb-2">
-                <input name="confirm-password" minlength="5" minlength="12" required type="password"
-                    placeholder="Confirm Password" class="d-block w-100 form-control rounded"
-                    aria-label="confirm password">
-                <span class="d-block error-message error-message text-start mt-1"></span>
+            <div class="d-flex align-items-center gap-4 mb-3 w-100">
+                <div class="input-group">
+                    <input name="password" minlength="5" minlength="12" required type="password" placeholder="Password"
+                        class="d-block w-100 form-control rounded py-2" aria-label="password">
+                    <span class="d-block error-message error-message text-start mt-1"></span>
+                </div>
+                <div class="input-group">
+                    <input name="confirm-password" minlength="5" minlength="12" required type="password"
+                        placeholder="Confirm Password" class="d-block w-100 form-control rounded py-2"
+                        aria-label="confirm password">
+                    <span class="d-block error-message error-message text-start mt-1"></span>
+                </div>
             </div>
             <span id="finalErrorMessage" class="d-block error-message text-center"></span>
             <input required type="submit" name="sign-up" id="signUpBtn"
-                class="sign-up__btn btn main-btn-red mt-3 mb-3 w-100" role="button" value="sign up"></input>
+                class="sign-up__btn btn main-btn-red mt-3 py-2 mb-3 w-100" role="button" value="sign up"></input>
             <span class="d-block">Already have an account? <a href="sign-in.html"
                     class="sign-in__redirect text-main-red page-content">Sign in here</a></span>
         </form>
     </main>
     <script src="../assets/scripts/sign-up-validate.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeMuigqAAAAADlvlCYys5m3xgcswPKjc5JZiuMj" async
+        defer></script>
+
+
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

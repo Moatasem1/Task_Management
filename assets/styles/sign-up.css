@@ -9,7 +9,11 @@ body>.container {
 }
 
 #signUpForm {
-    max-width: 439px;
+    max-width: 800px;
+}
+
+#signUpForm.sign-in {
+    max-width: 500px !important;
 }
 
 .sign-up>input::placeholder {
